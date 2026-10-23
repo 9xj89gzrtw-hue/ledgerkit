@@ -1,0 +1,25 @@
+name: tests
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ["3.9", "3.11", "3.12"]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+      - run: pip install eth-abi pytest
+      - name: unit + golden tests
+        run: python -m pytest -q
+      - name: reconcile the shipped dataset
+        run: |
+          python -m ledgerkit.cli verify --logs tests/fixtures/poidh_v1_logs.json \
+            --fee-bps 250 --expect-earned 3.726923002 --expect-paid 3.63374992695
