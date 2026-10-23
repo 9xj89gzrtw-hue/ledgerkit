@@ -1,5 +1,7 @@
 # ledgerkit
 
+[![tests](https://github.com/9xj89gzrtw-hue/ledgerkit/actions/workflows/tests.yml/badge.svg)](https://github.com/9xj89gzrtw-hue/ledgerkit/actions/workflows/tests.yml)
+
 Turn raw EVM logs into a per-wallet ETH/NFT ledger — then **prove it**, instead of
 trusting the spreadsheet.
 
